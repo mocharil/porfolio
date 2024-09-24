@@ -33,7 +33,7 @@ const ExperienceItem = ({ experience, isActive, onClick }) => {
 };
 
 const TechIcon = ({ tech }) => {
-  const iconPath = `/icons/${tech.toLowerCase()}.png`;
+  const iconPath = `/icons/${tech}.png`;
   return (
     <div className="flex flex-col items-center mx-1 mb-2">
       <div className="relative w-8 h-8">
