@@ -27,7 +27,7 @@ const SkillItem = ({ name, icon }) => {
 const Skills = () => {
   const skills = [
     { name: "Python", icon: "Python.png" },
-    { name: "MySQL", icon: "Mysql.png" },
+    { name: "MySQL", icon: "MySQL.png" },
     { name: "GCP", icon: "GCP.png" },
     { name: "FastAPI", icon: "FastAPI.png" },
     { name: "Flask", icon: "Flask.png" },
@@ -51,7 +51,7 @@ const Skills = () => {
     { name: "Ollama", icon: "Ollama.png" },
     { name: "Selenium", icon: "Selenium.png" },
     { name: "C++", icon: "C.png" },
-    { name: "DocumentAI", icon: "Documentai.png" },
+    { name: "DocumentAI", icon: "DocumentAi.png" },
     { name: "GCS", icon: "google cloud storage.png" },
     { name: "Vertex AI", icon: "Vertexai.png" },
     { name: "Firebase", icon: "Firebase.png" },
