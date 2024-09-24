@@ -26,8 +26,8 @@ const SkillItem = ({ name, icon }) => {
 
 const Skills = () => {
   const skills = [
-    { name: "Python", icon: "python.png" },
-    { name: "MySQL", icon: "mysql.png" },
+    { name: "Python", icon: "Python.png" },
+    { name: "MySQL", icon: "Mysql.png" },
     { name: "GCP", icon: "GCP.png" },
     { name: "FastAPI", icon: "FastAPI.png" },
     { name: "Flask", icon: "Flask.png" },
@@ -48,9 +48,15 @@ const Skills = () => {
     { name: "Gemini", icon: "Gemini.png" },
     { name: "Gephi", icon: "Gephi.png" },
     { name: "Java", icon: "Java.png" },
-    { name: "Ollama", icon: "ollama.png" },
-    { name: "Selenium", icon: "selenium.png" },
+    { name: "Ollama", icon: "Ollama.png" },
+    { name: "Selenium", icon: "Selenium.png" },
     { name: "C++", icon: "C.png" },
+    { name: "DocumentAI", icon: "Documentai.png" },
+    { name: "GCS", icon: "google cloud storage.png" },
+    { name: "Vertex AI", icon: "Vertexai.png" },
+    { name: "Firebase", icon: "Firebase.png" },
+    { name: "CloudRun", icon: "CloudRun.png" },
+    { name: "Archer", icon: "Archer.png" },
   ];
 
   const halfLength = Math.ceil(skills.length / 2);
