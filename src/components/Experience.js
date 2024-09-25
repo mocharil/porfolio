@@ -1,17 +1,29 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { XMarkIcon } from '@heroicons/react/24/solid';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
-const ExperienceItem = ({ experience, isActive, onClick }) => {
+const ExperienceItem = ({ experience, isActive, onClick, index }) => {
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
   return (
-    <div 
+    <motion.div 
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
       className={`flex items-center w-full cursor-pointer transition-all duration-300 ${isActive ? 'scale-105' : 'hover:scale-102'} mb-8`}
       onClick={onClick}
     >
       <div className="w-full text-center flex justify-center">
-        <div className="inline-block bg-gray-800 bg-opacity-75 backdrop-filter backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-blue-500/50 p-4 border border-gray-700 hover:border-blue-400 transition-all duration-300 relative">
+        <div className={`inline-block bg-gray-800 bg-opacity-75 backdrop-filter backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-blue-500/50 p-4 border border-gray-700 hover:border-blue-400 transition-all duration-300 relative ${isActive ? 'ring-2 ring-blue-500' : ''}`}
+             style={{ width: '500px', height: '150px' }}>
           <div className="flex items-center mb-2">
-            <div className="relative w-12 h-12 flex-shrink-0 mr-3">
+            <div className="relative w-20 h-20 flex-shrink-0 mr-3">
               <Image
                 src={experience.logo}
                 alt={experience.company}
@@ -20,22 +32,26 @@ const ExperienceItem = ({ experience, isActive, onClick }) => {
                 className="rounded-full"
               />
             </div>
-            <div>
-              <h3 className="text-sm font-semibold text-blue-300 truncate">{experience.position}</h3>
-              <p className="text-xs text-gray-400 truncate">{experience.company}</p>
+            <div className="text-left">
+              <h3 className="text-lg font-semibold text-blue-300 truncate">{experience.position}</h3>
+              <p className="text-lg text-gray-400 truncate">{experience.company}</p>
             </div>
           </div>
-          <p className="text-xs text-gray-300">{experience.start_date} - {experience.end_date}</p>
+          <p className="text-s text-gray-300">{experience.start_date} - {experience.end_date}</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 const TechIcon = ({ tech }) => {
   const iconPath = `/icons/${tech}.png`;
   return (
-    <div className="flex flex-col items-center mx-1 mb-2">
+    <motion.div 
+      className="flex flex-col items-center mx-1 mb-2"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+    >
       <div className="relative w-8 h-8">
         <Image
           src={iconPath}
@@ -46,7 +62,7 @@ const TechIcon = ({ tech }) => {
         />
       </div>
       <span className="text-xs text-gray-300 mt-1">{tech}</span>
-    </div>
+    </motion.div>
   );
 };
 
@@ -321,30 +337,16 @@ const Experience = () => {
       ]
     } ].sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
 
-
   useEffect(() => {
     if (timelineRef.current) {
       timelineRef.current.scrollTop = 0;
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (rocketRef.current && activeIndex !== null) {
-  //     const activeItem = document.getElementById(`experience-${activeIndex}`);
-  //     if (activeItem) {
-  //       const rect = activeItem.getBoundingClientRect();
-  //       const scrollY = window.scrollY || window.pageYOffset;
-  //       const targetTop = rect.top + scrollY;
-  //       rocketRef.current.style.transform = `translateY(${targetTop}px)`;
-  //     }
-  //   }
-  // }, [activeIndex]);
-
   const handleExperienceClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
     setIsExpanded(index !== activeIndex);
 
-    // Scroll to the clicked item
     const clickedItem = document.getElementById(`experience-${index}`);
     if (clickedItem) {
       clickedItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -364,10 +366,19 @@ const Experience = () => {
         <div className="absolute inset-0 bg-black opacity-60"></div>
       </div>
       <div className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-12 max-w-8xl mx-auto">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center text-blue-400 mb-12 space-glow neon-text">Flight Log</h2>
+        <motion.h2 
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-4xl sm:text-5xl md:text-6xl font-bold text-center text-blue-400 mb-12 space-glow neon-text"
+        >
+          Cosmic Career Journey
+        </motion.h2>
         <div className={`flex flex-col md:flex-row gap-8 transition-all duration-500 ${isExpanded ? 'md:translate-x-[-5%]' : ''}`}>
-          <div className={`md:w-1/2 mx-auto transition-all duration-500 ${isExpanded ? 'md:w-[45%]' : ''}`}>
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-blue-500 transform -translate-x-1/2"></div>
+          <motion.div 
+            className={`md:w-1/2 mx-auto transition-all duration-500 ${isExpanded ? 'md:w-[45%]' : ''}`}
+            layout
+          >
             <div className="relative overflow-y-auto max-h-[70vh] scrollbar-hide" ref={timelineRef}>
               {experiences.map((exp, index) => (
                 <div id={`experience-${index}`} key={index}>
@@ -375,77 +386,174 @@ const Experience = () => {
                     experience={exp} 
                     isActive={index === activeIndex}
                     onClick={() => handleExperienceClick(index)}
+                    index={index}
                   />
                 </div>
               ))}
             </div>
-          </div>
-          <div className={`md:w-1/2 transition-all duration-500 ${isExpanded ? 'md:w-[55%]' : 'md:w-0 md:overflow-hidden'}`}>
+          </motion.div>
+          <AnimatePresence>
             {activeIndex !== null && (
-              <div className="bg-gray-800 bg-opacity-75 backdrop-filter backdrop-blur-sm rounded-lg p-4 relative max-w-6xl mx-auto overflow-y-auto max-h-[70vh] scrollbar-hide">
-                <button 
-                  onClick={() => { setActiveIndex(null); setIsExpanded(false); }}
-                  className="absolute top-2 right-2 text-gray-400 hover:text-white"
-                >
-                  <XMarkIcon className="h-6 w-6" />
-                </button>
-                <div className="flex flex-col items-center mb-4">
-                  <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-2">
-                    <Image
-                      src={experiences[activeIndex].logo}
-                      alt={experiences[activeIndex].company}
-                      layout="fill"
-                      objectFit="contain"
-                      className="rounded-full"
-                    />
+              <motion.div 
+                key="details"
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 100 }}
+                transition={{ duration: 0.3 }}
+                className={`md:w-1/2 transition-all duration-500 ${isExpanded ? 'md:w-[55%]' : 'md:w-0 md:overflow-hidden'}`}
+              >
+                <div className="bg-gray-800 bg-opacity-75 backdrop-filter backdrop-blur-sm rounded-lg p-4 relative max-w-6xl mx-auto overflow-y-auto max-h-[70vh] scrollbar-hide">
+                  <motion.button 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => { setActiveIndex(null); setIsExpanded(false); }}
+                    className="absolute top-2 right-2 text-gray-400 hover:text-white"
+                  >
+                    <XMarkIcon className="h-6 w-6" />
+                  </motion.button>
+                  <div className="flex flex-col items-center mb-4">
+                    <motion.div 
+                      className="relative w-24 h-24 sm:w-32 sm:h-32 mb-2"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                    >
+                      <Image
+                        src={experiences[activeIndex].logo}
+                        alt={experiences[activeIndex].company}
+                        layout="fill"
+                        objectFit="contain"
+                        className="rounded-full"
+                      />
+                    </motion.div>
+                    <motion.h3 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="text-xl sm:text-2xl font-semibold text-blue-300 text-center"
+                    >
+                      {experiences[activeIndex].position}
+                    </motion.h3>
+                    <motion.p 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="text-lg sm:text-xl text-gray-300 text-center"
+                    >
+                      {experiences[activeIndex].company}
+                    </motion.p>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-semibold text-blue-300 text-center">{experiences[activeIndex].position}</h3>
-                  <p className="text-lg sm:text-xl text-gray-300 text-center">{experiences[activeIndex].company}</p>
-                </div>
-                <p className="text-sm sm:text-base text-gray-300 mb-2 text-center">{experiences[activeIndex].location} | {experiences[activeIndex].type}</p>
-                <p className="text-sm sm:text-base text-gray-300 mb-4 text-center">{experiences[activeIndex].start_date} - {experiences[activeIndex].end_date}</p>
-                <h4 className="text-sm sm:text-lg font-semibold text-blue-300 mb-2">Responsibilities:</h4>
-                <ul className="list-disc list-inside mb-4 text-sm sm:text-base text-gray-300">
-                  {experiences[activeIndex].responsibilities.map((resp, index) => (
-                    <li key={index}>{resp}</li>
-                  ))}
-                </ul>
-                {experiences[activeIndex].tech_stacks && (
-                  <>
-                    <h4 className="text-sm sm:text-lg font-semibold text-blue-300 mb-2">Tech Stack:</h4>
-                    <div className="flex flex-wrap justify-center gap-2 mb-4">
-                      {experiences[activeIndex].tech_stacks.map((tech, index) => (
-                        <TechIcon key={index} tech={tech} />
-                      ))}
-                    </div>
-                  </>
-                )}
-                {experiences[activeIndex].projects && experiences[activeIndex].projects.length > 0 && (
-                  <>
-                    <h4 className="text-sm sm:text-lg font-semibold text-blue-300 mb-2">Projects:</h4>
-                    {experiences[activeIndex].projects.map((project, index) => (
-                      <div key={index} className="mb-2">
-                        <h5 className="text-sm sm:text-base font-semibold text-blue-200 mb-1">{project.name}</h5>
-                        <ul className="list-disc list-inside">
-                          {project.achievements.map((achievement, idx) => (
-                            <li key={idx} className="text-sm sm:text-base text-gray-300">{achievement}</li>
-                          ))}
-                        </ul>
-                      </div>
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="text-sm sm:text-base text-gray-300 mb-2 text-center"
+                  >
+                    {experiences[activeIndex].location} | {experiences[activeIndex].type}
+                  </motion.p>
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-sm sm:text-base text-gray-300 mb-4 text-center"
+                  >
+                    {experiences[activeIndex].start_date} - {experiences[activeIndex].end_date}
+                  </motion.p>
+                  <motion.h4 
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="text-sm sm:text-lg font-semibold text-blue-300 mb-2"
+                  >
+                    Responsibilities:
+                  </motion.h4>
+                  <motion.ul 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.7 }}
+                    className="list-disc list-inside mb-4 text-sm sm:text-base text-gray-300"
+                  >
+                    {experiences[activeIndex].responsibilities.map((resp, index) => (
+                      <motion.li 
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.7 + index * 0.1 }}
+                      >
+                        {resp}
+                      </motion.li>
                     ))}
-                  </>
-                )}
-              </div>
+                  </motion.ul>
+                  {experiences[activeIndex].tech_stacks && (
+                    <>
+                      <motion.h4 
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.8 }}
+                        className="text-sm sm:text-lg font-semibold text-blue-300 mb-2"
+                      >
+                        Tech Stack:
+                      </motion.h4>
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.9 }}
+                        className="flex flex-wrap justify-center gap-2 mb-4"
+                      >
+                        {experiences[activeIndex].tech_stacks.map((tech, index) => (
+                          <TechIcon key={index} tech={tech} />
+                        ))}
+                      </motion.div>
+                    </>
+                  )}
+                  {experiences[activeIndex].projects && experiences[activeIndex].projects.length > 0 && (
+                    <>
+                      <motion.h4 
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1 }}
+                        className="text-sm sm:text-lg font-semibold text-blue-300 mb-2"
+                      >
+                        Projects:
+                      </motion.h4>
+                      {experiences[activeIndex].projects.map((project, index) => (
+                        <motion.div 
+                          key={index} 
+                          className="mb-2"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.1 + index * 0.1 }}
+                        >
+                          <h5 className="text-sm sm:text-base font-semibold text-blue-200 mb-1">{project.name}</h5>
+                          <ul className="list-disc list-inside">
+                            {project.achievements.map((achievement, idx) => (
+                              <li key={idx} className="text-sm sm:text-base text-gray-300">{achievement}</li>
+                            ))}
+                          </ul>
+                        </motion.div>
+                      ))}
+                    </>
+                  )}
+                </div>
+              </motion.div>
             )}
-          </div>
+          </AnimatePresence>
         </div>
       </div>
-      <div
+      <motion.div
         ref={rocketRef}
-        className={`fixed right-0 w-24 h-24 md:w-32 md:h-32 z-20 transition-all duration-500 ${
-          isExpanded ? 'md:right-[55%]' : ''
+        className={`fixed w-24 h-24 md:w-32 md:h-32 z-20 transition-all duration-500 ${
+          isExpanded ? 'md:right-[52%] bottom-[2%]' : 'right-[2%] bottom-[2%]'
         }`}
-        style={{ transition: 'transform 0.5s ease-in-out' }}
+        animate={{
+          y: [0, -10, 0],
+          rotate: [0, 5, -5, 0],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
       >
         <Image
           src="/background/rocket.gif"
@@ -453,7 +561,7 @@ const Experience = () => {
           objectFit="contain"
           alt="Rocket"
         />
-      </div>
+      </motion.div>
     </section>
   );
 };
