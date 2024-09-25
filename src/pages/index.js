@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Header from '../components/Header';
 import AboutMe from '../components/AboutMe';
 import Experience from '../components/Experience';
@@ -8,6 +9,7 @@ import HonorsAwards from '../components/HonorsAwards';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ShinyButton from '../components/ShinyButton';
+import ChatBot from '../components/ChatBot';
 import { motion } from 'framer-motion';
 
 export default function Home() {
@@ -74,6 +76,19 @@ export default function Home() {
               </ShinyButton>
             </motion.div>
           </div>
+          <motion.div
+            className="absolute bottom-10 right-10 w-32 h-32"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+          >
+            <Image
+              src="/background/rocket.gif"
+              alt="Rocket"
+              layout="fill"
+              objectFit="contain"
+            />
+          </motion.div>
         </section>
 
         <motion.div
@@ -92,6 +107,7 @@ export default function Home() {
       </main>
 
       <Footer />
+      <ChatBot />
     </div>
   );
 }
