@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,15 +18,36 @@ const ChatBot = () => {
     setInputMessage(e.target.value);
   };
 
+  const formatToBold = (text) => {
+    return text.replace(/\*\*(.*?)\*\*/g, '**$1**');
+  };
+
   const handleSendMessage = async () => {
     if (inputMessage.trim() === '') return;
 
     setMessages([...messages, { text: inputMessage, sender: 'user' }]);
     setInputMessage('');
 
-    setTimeout(() => {
-      setMessages(prevMessages => [...prevMessages, { text: "Greetings, space explorer! This is a simulated response from your AI Copilot. In the future, I'll be powered by advanced AI to assist you on your cosmic journey through data science and technology!", sender: 'bot' }]);
-    }, 1000);
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question: inputMessage }),
+      });
+
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
+
+      const data = await response.json();
+      const formattedAnswer = formatToBold(data.answer);
+      setMessages(prevMessages => [...prevMessages, { text: formattedAnswer, sender: 'bot' }]);
+    } catch (error) {
+      console.error('Error fetching response:', error);
+      setMessages(prevMessages => [...prevMessages, { text: "I'm sorry, I encountered an error while processing your request. Please try again later.", sender: 'bot' }]);
+    }
   };
 
   useEffect(() => {
@@ -84,7 +106,7 @@ const ChatBot = () => {
                 }`}
               >
                 <span className="chatbot-message-content">
-                  {message.text}
+                  <ReactMarkdown>{message.text}</ReactMarkdown>
                 </span>
               </div>
             ))}

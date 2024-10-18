@@ -12,12 +12,12 @@ const Header = () => {
     { href: '#about', label: 'Mission Brief' },
     { href: '#experience', label: 'Flight Log' },
     { href: '#skills', label: 'Space Gear' },
-    { href: '#awards', label: 'Stellar Achievements' },
+    // { href: '#awards', label: 'Stellar Achievements' },
     { href: '#contact', label: 'Communication Hub' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white shadow-md">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-70 text-white shadow-md">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold flex items-center">
           <Image src="/icons/aril.jpg" alt="Aril's logo" width={40} height={40} className="rounded-full mr-2" />

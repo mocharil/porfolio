@@ -18,7 +18,7 @@ const Footer = () => {
               <li><Link href="#about" className="hover:text-blue-400 transition duration-300">Mission Brief</Link></li>
               <li><Link href="#experience" className="hover:text-blue-400 transition duration-300">Flight Log</Link></li>
               <li><Link href="#skills" className="hover:text-blue-400 transition duration-300">Space Gear</Link></li>
-              <li><Link href="#awards" className="hover:text-blue-400 transition duration-300">Stellar Achievements</Link></li>
+              {/* <li><Link href="#awards" className="hover:text-blue-400 transition duration-300">Stellar Achievements</Link></li> */}
             </ul>
           </div>
           <div>
@@ -26,8 +26,8 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>Interstellar Data Mining</li>
               <li>AI-Powered Space Exploration</li>
-              <li>Quantum Computing Advancements</li>
               <li>Deep Space Analytics</li>
+              <li>Piloting An Automation System</li>
             </ul>
           </div>
         </div>

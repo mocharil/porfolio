@@ -18,7 +18,7 @@ const AboutMe = () => {
         />
         <div className="absolute inset-0 bg-black bg-opacity-70"></div>
       </div>
-      <div className="relative z-10 w-3/4 h-full max-w-1xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative top-10 z-10 w-3/4 h-full max-w-1xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2 
           className="section-title mb-4 neon-text"
           initial={{ opacity: 0, y: -50 }}
@@ -48,19 +48,19 @@ const AboutMe = () => {
                 <ul className="list-none space-y-2 text-lg">
                   <li className="flex items-center space-x-2">
                     <span className="text-blue-400">🚀</span>
-                    <span>Intergalactic Machine Learning</span>
+                    <span>Machine Learning and Deep Learning</span>
                   </li>
                   <li className="flex items-center space-x-2">
                     <span className="text-purple-400">🌌</span>
-                    <span>Nebula Data Analytics</span>
+                    <span>Data Analytics</span>
                   </li>
                   <li className="flex items-center space-x-2">
                     <span className="text-green-400">🤖</span>
-                    <span>Artificial Intelligence Navigation</span>
+                    <span>Artificial Intelligence</span>
                   </li>
                   <li className="flex items-center space-x-2">
                     <span className="text-red-400">💥</span>
-                    <span>Big Data Supernova Processing</span>
+                    <span>Big Data Processing and Automation</span>
                   </li>
                 </ul>
               </motion.div>
@@ -73,19 +73,19 @@ const AboutMe = () => {
                 <ul className="list-none space-y-2 text-lg">
                   <li className="flex items-center space-x-2">
                     <span className="text-yellow-400">🐍</span>
-                    <span>Python, R, SQL Propulsion Systems</span>
+                    <span>Python, JavaScript, Java, C++</span>
                   </li>
                   <li className="flex items-center space-x-2">
                     <span className="text-blue-400">🧠</span>
-                    <span>TensorFlow, PyTorch, Scikit-learn Warp Drives</span>
+                    <span>Scikit-Learn, Tensorflow, PyTorch, Gemini, OpenAI, Claude</span>
                   </li>
                   <li className="flex items-center space-x-2">
                     <span className="text-orange-400">🐘</span>
-                    <span>Hadoop, Spark Quantum Computers</span>
+                    <span>MySQL, Elasticsearch, MongoDB, ArangoDB, BigQuery</span>
                   </li>
                   <li className="flex items-center space-x-2">
                     <span className="text-cyan-400">☁️</span>
-                    <span>Cloud Platforms (AWS, GCP) Space Stations</span>
+                    <span>Google Cloud Platform</span>
                   </li>
                 </ul>
               </motion.div>

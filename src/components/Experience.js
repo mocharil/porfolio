@@ -23,7 +23,7 @@ const ExperienceItem = ({ experience, isActive, onClick, index }) => {
         <div className={`inline-block bg-gray-800 bg-opacity-75 backdrop-filter backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-blue-500/50 p-4 border border-gray-700 hover:border-blue-400 transition-all duration-300 relative ${isActive ? 'ring-2 ring-blue-500' : ''}`}
              style={{ width: '500px', height: '150px' }}>
           <div className="flex items-center mb-2">
-            <div className="relative w-20 h-20 flex-shrink-0 mr-3">
+            <div className="relative w-20 h-20 flex-shrink-0 mr-4">
               <Image
                 src={experience.logo}
                 alt={experience.company}
@@ -32,12 +32,12 @@ const ExperienceItem = ({ experience, isActive, onClick, index }) => {
                 className="rounded-full"
               />
             </div>
-            <div className="text-left">
+            <div className="text-left flex-grow">
               <h3 className="text-lg font-semibold text-blue-300 truncate">{experience.position}</h3>
               <p className="text-lg text-gray-400 truncate">{experience.company}</p>
             </div>
           </div>
-          <p className="text-s text-gray-300">{experience.start_date} - {experience.end_date}</p>
+          <p className="text-s text-gray-300 text-left">{experience.start_date} - {experience.end_date}</p>
         </div>
       </div>
     </motion.div>
@@ -61,7 +61,7 @@ const TechIcon = ({ tech }) => {
           objectFit="contain"
         />
       </div>
-      <span className="text-xs text-gray-300 mt-1">{tech}</span>
+      <span className="text-xs text-gray-300 mt-4 text-center whitespace-nowrap">{tech}</span>
     </motion.div>
   );
 };
@@ -70,7 +70,7 @@ const Experience = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const timelineRef = useRef(null);
-  const rocketRef = useRef(null);
+
 
   const experiences = [
     {
@@ -82,8 +82,8 @@ const Experience = () => {
       start_date: "Jun 2023",
       end_date: "Present",
       responsibilities: [
-        "Develop and deploy machine learning models and advanced analytics solutions.",
-        "Optimize script execution, enhance classification models, and streamline operational processes."
+        "Spearheaded the development and deployment of cutting-edge machine learning models, enhancing decision-making and optimizing business processes.",
+        "Automated complex data pipelines and streamlined operational workflows, leading to significant efficiency improvements."
       ],
       tech_stacks: [
         "Python", "Airflow", "MySQL", "Metabase", "Looker", "ArangoDB", "VertexAI", "GCP", "DocumentAI", "BigQuery", "FastAPI", "Flask"
@@ -92,44 +92,44 @@ const Experience = () => {
         {
           name: "Script Legacy Improvement & Python Wrapper Development",
           achievements: [
-            "Reduced execution time for error seeding detection by 98.33%.",
-            "Optimized master segment table process by 80%.",
-            "Developed 'askquinta' library, indexed on PyPi."
+            "Reduced execution time for error detection by 98.33%, utilizing advanced data processing techniques.",
+            "Optimized the master segment table process by 80%, enabling faster data retrieval.",
+            "Developed the 'askquinta' Python library for automation and standardized error handling, available on PyPi."
           ]
         },
         {
           name: "Modeling and Deployment Dashboard for Item Classification & User Scoring",
           achievements: [
-            "Increased classification model accuracy from 76% to 83%.",
-            "Developed scoring system based on business type and product transactions."
+            "Enhanced classification model accuracy from 76% to 93%, leveraging advanced machine learning algorithms.",
+            "Implemented a comprehensive scoring system for user segmentation based on transaction patterns."
           ]
         },
         {
           name: "KYC and KYB NWOW Dashboard and Analysis",
           achievements: [
-            "Optimized data pipeline for easier Ops team access.",
-            "Introduced data change tracker for improving monitoring."
+            "Streamlined KYC/KYB data pipeline, significantly improving access for Operations teams.",
+            "Introduced a robust data change tracker to enhance monitoring and compliance tracking."
           ]
         },
         {
           name: "Finance Operation & Bank Statement Analysis Dashboard",
           achievements: [
-            "Reduced process time by 98% with a Flask-based dashboard.",
-            "Developed automated reconciliation and Source of Fund selection."
+            "Reduced processing time by 98% through the development of a Flask-based interactive dashboard.",
+            "Built automated reconciliation and Source of Fund (SOF) selection systems, minimizing manual errors."
           ]
         },
         {
           name: "OCR DocumentAI & Gemini",
           achievements: [
-            "Designed OCR schema and annotated data for receipts, invoices, and bank statements.",
-            "Deployed OCR API with Gemini Model, enhancing performance and reducing costs."
+            "Designed an OCR schema for document processing, covering receipts, invoices, and bank statements.",
+            "Deployed the OCR API using Gemini Model, resulting in cost reductions and improved performance."
           ]
         },
         {
           name: "Invoice Validation & KYC/KYB Process Automation",
           achievements: [
-            "Implemented detection of signatures, stamps, and duty stamps.",
-            "Developed ID card clarity scoring and face similarity scoring."
+            "Implemented advanced detection models for signatures, stamps, and duty stamps in document verification.",
+            "Built ID card clarity and face similarity scoring models for streamlined KYC processes."
           ]
         }
       ]
@@ -143,25 +143,25 @@ const Experience = () => {
       start_date: "Jan 2022",
       end_date: "Jun 2023",
       responsibilities: [
-        "Enhanced data-driven auditing processes and fraud detection mechanisms."
+         "Enhanced data-driven auditing processes, boosting fraud detection capabilities through data science solutions."
       ],
       tech_stacks: [
         "Python", "Airflow", "MySQL", "Redash", "Looker", "BigQuery", "FastAPI", "Flask", "Archer"
       ],
-      projects: [
-        {
-          name: "Audit Dashboard Automation",
-          achievements: [
-            "Developed automated dashboards for auditing using Redash and Looker."
-          ]
-        },
-        {
-          name: "Fraud Analysis & Value Audit",
-          achievements: [
-            "Identified fraudulent activities and implemented network analysis to detect syndicates."
-          ]
-        }
-      ]
+        projects: [
+          {
+            name: "Audit Dashboard Automation",
+            achievements: [
+              "Developed automated dashboards using Redash and Looker, increasing auditing efficiency by 70%."
+            ]
+          },
+          {
+            name: "Fraud Analysis & Value Audit",
+            achievements: [
+              "Identified fraudulent activities and performed syndicate detection using network analysis, mitigating potential risks."
+            ]
+          }
+        ]
     },
     {
       company: "PT Telkom Indonesia",
@@ -175,19 +175,25 @@ const Experience = () => {
         "Developed advanced analytics solutions and machine learning models."
       ],
       tech_stacks: [
-        "Python", "Elasticsearch", "MySQL", "FastAPI", "Flask", "Docker", "Gephi", "Airflow", "Spark"
+        "Python", "Elasticsearch", "MySQL", "FastAPI", "Flask", "Docker", "Gephi", "Airflow", "Spark","Kibana","JavaScript"
       ],
       projects: [
         {
           name: "Legal Analytics Dashboard",
           achievements: [
-            "Scraped data from 60+ websites and developed OCR models to extract legal documents."
+            "Led the development of a complete end-to-end data pipeline, handling data extraction, transformation, modeling, and deployment to production.",
+            "Scraped data from over 60+ websites to obtain legal documents in PDF format, using advanced web scraping techniques.",
+            "Developed custom OCR models to accurately extract text and metadata from complex PDF documents.",
+            "Created a structured data model schema from the OCR output and ingested it into a NoSQL database (Elasticsearch), ensuring high scalability and searchability.",
+            "Implemented text analytics models, including similarity analysis, sentiment analysis, relevancy scoring, and a plagiarism checker to assess each paragraph of legal texts.",
+            "Built a powerful search engine using Elasticsearch integrated with a microservice architecture, providing an API that supports a front-end dashboard for dynamic legal text exploration and comparison.",
+            "Designed and developed the front-end dashboard and microservices, allowing end-users to interactively search, filter, and analyze the extracted legal data."
           ]
         },
         {
           name: "Social Media Analysis",
           achievements: [
-            "Performed sentiment analysis and network analysis for decision-making insights."
+             "Performed sentiment and network analysis on social media data to provide actionable insights for strategic decision-making and public sentiment tracking."
           ]
         }
       ]
@@ -209,15 +215,15 @@ const Experience = () => {
       projects: [
         {
           name: "Political Campaign Profiling & Brand Analysis",
-          achievements: [
-            "Conducted profiling for political campaigns and provided insights on social media strategies."
-          ]
+            achievements: [
+              "Analyzed and provided strategic insights for political campaigns, leveraging sentiment analysis and social media data."
+            ]
         },
         {
           name: "Social Scoring System & Social Media Analysis",
-          achievements: [
-            "Developed a social scoring system for assessing credit risk using social media data."
-          ]
+        achievements: [
+          "Developed a social scoring system to assess credit risk based on online behavior patterns, aiding financial decisions."
+        ]
         }
       ]
     },
@@ -230,16 +236,29 @@ const Experience = () => {
       start_date: "2023",
       end_date: "2023",
       responsibilities: [
-        "Delivered a comprehensive webinar on advanced data science topics.",
-        "Engaged with participants to answer questions and provide insights on industry trends."
+       "Conducted a series of 14 educational webinars focused on data science and AI, covering various topics from beginner-level programming to advanced machine learning applications.",
+        "Delivered interactive sessions designed to provide practical, real-world applications for students and professionals, helping them advance their technical skills.",
+        "Engaged with participants to answer questions, provide in-depth insights, and guide them through hands-on coding exercises to reinforce their learning."
+      ],
+      tech_stacks: [
+        "Python", "MySQL", "BigQuery"
       ],
       projects: [
         {
-          name: "Data Science in Practice: From Theory to Application",
+          name: "Data Science Webinar Series",
           achievements: [
-            "Presented real-world case studies demonstrating the practical application of data science.",
-            "Introduced attendees to cutting-edge tools and methodologies in the field.",
-            "Received positive feedback with a 95% satisfaction rate from participants."
+            "Hosted a variety of topics, including 'Python for Beginners', 'SQL Fundamentals', 'Data Wrangling with Pandas', and advanced sessions such as 'Linear Regression and Model Evaluation'.",
+            "Developed tailored content for each session, ensuring relevance and value for participants ranging from complete beginners to intermediate-level professionals.",
+            "Created interactive case studies and coding challenges, resulting in high engagement and positive feedback, with an average satisfaction score of 4.8/5.",
+            "Guided over 500+ participants through practical exercises, boosting their confidence in applying data science techniques to solve business problems."
+          ]
+        },
+        {
+          name: "AI-Powered Webinars",
+          achievements: [
+            "Introduced attendees to AI-related topics such as 'Building Intelligent Assistants with GPT-3' and 'Unlocking the Power of Natural Language Processing (NLP) for Text Analysis'.",
+            "Provided live demonstrations on using OpenAI APIs for real-world applications, including personal assistants and intelligent chatbots.",
+            "Helped participants bridge the gap between theory and implementation, showcasing practical use cases for AI in business scenarios."
           ]
         }
       ]
@@ -252,17 +271,21 @@ const Experience = () => {
       type: "Class",
       start_date: "2023",
       end_date: "2023",
-      responsibilities: [
-        "Designed and delivered comprehensive courses on data science and machine learning.",
-        "Mentored students through hands-on projects and real-world problem-solving."
+     responsibilities: [
+        "Delivered an insightful webinar focused on mastering Microsoft Excel to boost career potential, covering essential features and advanced functionalities.",
+        "Guided participants through practical Excel use cases, from data cleaning and analysis to financial modeling, helping them enhance their productivity and decision-making skills.",
+        "Engaged with attendees through interactive Q&A sessions, providing solutions to common Excel challenges encountered in the workplace."
       ],
+        tech_stacks: [
+     "Data Analysis", "Data Visualization", "Google Sheet"
+  ],
       projects: [
         {
-          name: "Machine Learning Bootcamp",
+          name: "Excel for Career Advancement: Mastering Excel to Improve Your Career Potential",
           achievements: [
-            "Developed a 12-week curriculum covering fundamental to advanced ML concepts.",
-            "Guided students in building end-to-end ML projects using industry-standard tools.",
-            "Achieved a 90% course completion rate with high student satisfaction scores."
+            "Designed the curriculum to cater to both beginners and intermediate users, ensuring a comprehensive understanding of Excel's capabilities.",
+            "Explained complex Excel functions such as VLOOKUP, PivotTables, and data visualization techniques with clarity, enabling participants to apply these skills in their professional roles.",
+            "Received positive feedback with a 90% satisfaction rate and requests for more advanced Excel sessions, highlighting the impact of the content."
           ]
         }
       ]
@@ -276,16 +299,23 @@ const Experience = () => {
       start_date: "2023",
       end_date: "2023",
       responsibilities: [
-        "Led classes on data science fundamentals and career preparation strategies.",
-        "Provided personalized guidance to students transitioning into data-related careers."
+        "Designed and led a comprehensive data visualization class tailored for Prakerja participants, consisting of 5 interactive sessions per batch.",
+        "Mentored students through each stage of data analysis and visualization, equipping them with practical skills for career advancement in data-related fields."
+      ],
+      tech_stacks: [
+        "Looker", "Google Sheets", "Data Visualization", "Data Analysis"
       ],
       projects: [
         {
-          name: "Data Science Career Jumpstart Program",
+          name: "Visualisasi Data menggunakan Google Looker Data Studio",
           achievements: [
-            "Created a comprehensive curriculum blending technical skills with job market insights.",
-            "Conducted mock interviews and portfolio reviews to enhance students' job readiness.",
-            "Helped 80% of program graduates secure data-related positions within 6 months."
+            "Created a structured 5-session curriculum focused on introducing data concepts, analysis techniques, and visualization strategies using Google Looker Data Studio.",
+            "Conducted Session 1: Introduction to Data, Big Data, Database Concepts, and the Data Analyst Profession, providing foundational knowledge to participants.",
+            "Led Session 2: Data Preparation and Cleaning using Google Sheets, covering essential functions, formulas, and data manipulation techniques.",
+            "Explained Session 3: Data Analysis using Analytics Tools, where participants learned basic analytical methods and how to derive insights from data.",
+            "Taught Session 4: Data Visualization Techniques, focusing on selecting the right charts, graphs, and visual formats for different data types.",
+            "Guided Session 5: Building Dashboards in Google Looker Data Studio, helping participants integrate their visualizations into interactive dashboards for reporting and presentations.",
+            "Received positive feedback from Prakerja participants for providing practical skills and a deep understanding of data visualization concepts, with a batch completion rate of over 85%."
           ]
         }
       ]
@@ -299,43 +329,56 @@ const Experience = () => {
       start_date: "2023",
       end_date: "2023",
       responsibilities: [
-        "Presented cutting-edge topics in AI and machine learning to a diverse audience.",
-        "Facilitated discussions on the ethical implications and future trends of AI technology."
+        "Presented an engaging webinar titled *'Introduction to Data Science'* aimed at providing a solid foundation for beginners entering the field.",
+        "Discussed key concepts, applications, and career pathways in data science, highlighting the importance of data-driven decision making."
+      ],
+      tech_stacks: [
+        "Python", "Pandas", "Matplotlib", "Scikit-learn", "Google Colab"
       ],
       projects: [
         {
-          name: "AI Revolution: Navigating the Future of Technology",
+          name: "Introduction to Data Science Webinar",
           achievements: [
-            "Delivered an engaging presentation on the latest advancements in AI and their practical applications.",
-            "Conducted a live Q&A session, addressing complex AI concepts in an accessible manner.",
-            "Inspired attendees to explore AI integration in their respective fields, as reflected in post-webinar surveys."
+            "Covered core data science topics including data preprocessing, exploratory data analysis, and basic machine learning concepts.",
+            "Demonstrated practical coding examples using Python and Pandas to showcase data manipulation techniques.",
+            "Guided participants through building a simple machine learning model using Scikit-learn for hands-on learning.",
+            "Explained real-world applications of data science in various industries and shared valuable insights on how to kickstart a career in the field.",
+            "Received positive feedback from attendees, with an average satisfaction score of 92% for delivering complex topics in an easily digestible format."
           ]
         }
       ]
-    },
+    }
+    ,   
+{
+  company: "Plabs",
+  logo: "/logos/Plabs.jpeg",
+  position: "Project Lead",
+  location: "Bandung, West Java",
+  type: "Project",
+  start_date: "2023",
+  end_date: "2023",
+  responsibilities: [
+    "Led the development of the ECLIP application, which stands for *Electronic Clipping*, for the Biro Administrasi Pimpinan Sekretariat Daerah Provinsi Jawa Barat.",
+    "Designed an end-to-end solution to automate news monitoring and reporting for issues related to West Java."
+  ],
+  tech_stacks: [
+    "Python", "Elasticsearch", "Selenium", "BeautifulSoup", "Kibana", "Docker"
+  ],
+  projects: [
     {
-      company: "Plabs",
-      logo: "/logos/Plabs.jpeg",
-      position: "Project Lead",
-      location: "Bandung, West Java",
-      type: "Project",
-      start_date: "2023",
-      end_date: "2023",
-      responsibilities: [
-        "Led the development of the ECLIP application for Biro Administrasi Pimpnan Sekretariat Daerah Provinsi Jawa Barat."
-      ],
-      projects: [
-        {
-          name: "ECLIP (Electronic Classification and Imaging Processing)",
-          achievements: [
-            "Developed an application for efficient document management and processing.",
-            "Implemented features for document classification and imaging processing.",
-            "Streamlined administrative processes for the West Java Provincial Secretariat.",
-            "Reduced document processing time by 60% and improved accuracy of classification by 40%."
-          ]
-        }
+      name: "ECLIP (Electronic Clipping)",
+      achievements: [
+        "Developed a scraping solution targeting over 300+ news websites to collect the latest news articles related to West Java.",
+        "Built a structured data model schema for storing and indexing news articles in Elasticsearch for fast retrieval and search.",
+        "Implemented a powerful search engine utilizing Elasticsearch's full-text search and custom ranking to surface the most relevant news articles.",
+        "Created a dashboard monitoring system using Kibana to provide real-time analytics on the number of news articles, sentiment analysis, and trend tracking.",
+        "Streamlined the process of creating daily and weekly reports for the administrative bureau, reducing manual work by over 70% and improving the accuracy of news monitoring.",
+        "Enhanced the platform's usability by building a user-friendly Flask-based web interface for managing and searching news records."
       ]
-    } ].sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
+    }
+  ]
+}
+ ].sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
 
   useEffect(() => {
     if (timelineRef.current) {
@@ -366,7 +409,7 @@ const Experience = () => {
         <div className="absolute inset-0 bg-black opacity-60"></div>
       </div>
       <div className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-12 max-w-8xl mx-auto">
-        <motion.h2 
+      <motion.h2 
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -540,28 +583,7 @@ const Experience = () => {
           </AnimatePresence>
         </div>
       </div>
-      <motion.div
-        ref={rocketRef}
-        className={`fixed w-24 h-24 md:w-32 md:h-32 z-20 transition-all duration-500 ${
-          isExpanded ? 'md:right-[52%] bottom-[2%]' : 'right-[2%] bottom-[2%]'
-        }`}
-        animate={{
-          y: [0, -10, 0],
-          rotate: [0, 5, -5, 0],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      >
-        <Image
-          src="/background/rocket.gif"
-          layout="fill"
-          objectFit="contain"
-          alt="Rocket"
-        />
-      </motion.div>
+     
     </section>
   );
 };
