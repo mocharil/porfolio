@@ -21,7 +21,7 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold flex items-center">
           <Image src="/icons/aril.jpg" alt="Aril's logo" width={40} height={40} className="rounded-full mr-2" />
-          SALFA's Space Station
+          Aril's Space Station
         </Link>
         <nav className="hidden md:flex items-center space-x-6">
           {navItems.map((item) => (
