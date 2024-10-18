@@ -1,11 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Header from '../components/Header';
 import AboutMe from '../components/AboutMe';
 import Experience from '../components/Experience';
 import Skills from '../components/Skills';
-import HonorsAwards from '../components/HonorsAwards';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ShinyButton from '../components/ShinyButton';
@@ -14,6 +13,7 @@ import { motion } from 'framer-motion';
 
 export default function Home() {
   const missionBriefRef = useRef(null);
+  const [rocketPosition, setRocketPosition] = useState({ x: 0, y: 0 });
 
   const scrollToMissionBrief = () => {
     missionBriefRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -34,6 +34,23 @@ export default function Home() {
     };
 
     createStars();
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercentage = scrollY / maxScroll;
+      
+      setRocketPosition(prevPosition => ({
+        ...prevPosition,
+        y: scrollPercentage * window.innerHeight
+      }));
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -47,7 +64,7 @@ export default function Home() {
       <Header />
 
       <main className="pt-16">
-        <section className="h-screen flex items-center justify-center bg-[url('/background/background_mission.jpg')] bg-cover bg-center relative overflow-hidden">
+      <section className="h-screen flex items-center justify-center bg-[url('/background/background_mission.jpg')] bg-cover bg-center relative overflow-hidden">
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           <div className="container mx-auto px-6 text-center relative z-10">
             <motion.h1 
@@ -76,19 +93,7 @@ export default function Home() {
               </ShinyButton>
             </motion.div>
           </div>
-          <motion.div
-            className="absolute bottom-10 right-10 w-32 h-32"
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-          >
-            <Image
-              src="/background/rocket.gif"
-              alt="Rocket"
-              layout="fill"
-              objectFit="contain"
-            />
-          </motion.div>
+
         </section>
 
         <motion.div
@@ -101,13 +106,14 @@ export default function Home() {
           <AboutMe />
           <Experience />
           <Skills />
-          <HonorsAwards />
           <Contact />
         </motion.div>
       </main>
 
       <Footer />
       <ChatBot />
+
+    
     </div>
   );
 }
