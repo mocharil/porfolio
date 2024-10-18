@@ -112,7 +112,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Contact
 
-If you have any questions or suggestions, please feel free to contact me at [your-email@example.com].
+If you have any questions or suggestions, please feel free to contact me at [arilindra21@gmail.com](arilindra21@gmail.com).
 
 ---
 
