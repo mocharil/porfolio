@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import AboutMe from '../components/AboutMe';
 import Experience from '../components/Experience';
 import Skills from '../components/Skills';
+import Achievements from '../components/Achievements';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ShinyButton from '../components/ShinyButton';
@@ -64,7 +65,7 @@ export default function Home() {
       <Header />
 
       <main className="pt-16">
-      <section className="h-screen flex items-center justify-center bg-[url('/background/background_mission.jpg')] bg-cover bg-center relative overflow-hidden">
+        <section className="h-screen flex items-center justify-center bg-[url('/background/background_mission.jpg')] bg-cover bg-center relative overflow-hidden">
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           <div className="container mx-auto px-6 text-center relative z-10">
             <motion.h1 
@@ -76,12 +77,28 @@ export default function Home() {
               Moch. Aril Indra Permana
             </motion.h1>
             <motion.p 
-              className="text-2xl mb-8 text-blue-300"
+              className="text-2xl mb-8 text-blue-300 flex items-center justify-center gap-3"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Data Scientist Exploring the Universe of Information
+              Senior Data Scientist 
+              <svg 
+                className="w-6 h-6 text-yellow-400 animate-pulse"
+                viewBox="0 0 24 24" 
+                fill="white"
+              >
+                <path d="M12 0L15.708 8.472L24 9.116L17.316 15.056L19.472 24L12 19.252L4.528 24L6.684 15.056L0 9.116L8.292 8.472L12 0Z"/>
+              </svg>
+              Founder of{" "}
+              <a 
+                href="https://insight-jakarta-ai.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-200 transition-colors duration-300 hover:underline"
+              >
+                Insight Jakarta
+              </a>
             </motion.p>
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
@@ -93,7 +110,6 @@ export default function Home() {
               </ShinyButton>
             </motion.div>
           </div>
-
         </section>
 
         <motion.div
@@ -106,14 +122,13 @@ export default function Home() {
           <AboutMe />
           <Experience />
           <Skills />
+          <Achievements />
           <Contact />
         </motion.div>
       </main>
 
       <Footer />
       <ChatBot />
-
-    
     </div>
   );
 }
