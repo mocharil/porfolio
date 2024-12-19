@@ -89,8 +89,8 @@ const Skills = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="mb-8">
-            <Marquee className="py-6" pauseOnHover={true} reverse={true} speed={20}>
+        <div className="mb-8">
+            <Marquee className="py-6" direction="left" pauseOnHover={true} speed={15}>
               {[...firstRowSkills, ...firstRowSkills].map((skill, index) => (
                 <div key={`${skill.name}-${index}`} className="mx-3">
                   <SkillItem {...skill} />
@@ -99,7 +99,7 @@ const Skills = () => {
             </Marquee>
           </div>
           <div className="mb-8">
-            <Marquee className="py-6" pauseOnHover={true} speed={20}>
+            <Marquee className="py-6" direction="right" pauseOnHover={true} speed={15}>
               {[...secondRowSkills, ...secondRowSkills].map((skill, index) => (
                 <div key={`${skill.name}-${index}`} className="mx-3">
                   <SkillItem {...skill} />

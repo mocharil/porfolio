@@ -74,6 +74,38 @@ const Experience = () => {
 
   const experiences = [
     {
+      company: "Insight Jakarta AI",
+      logo: "/logos/insight-jakarta-logo.png",
+      position: "Founder & Lead Developer",
+      location: "Jakarta",
+      type: "Project",
+      start_date: "2024",
+      end_date: "Present",
+      responsibilities: [
+        "Founded and led the development of Insight Jakarta AI, an innovative platform for analyzing and visualizing Jakarta's public discourse and social media data.",
+        "Designed and implemented end-to-end ETL pipeline for data collection and analysis from multiple sources including Twitter/X, news portals, and government websites.",
+        "Developed advanced AI capabilities using Gemini for sentiment analysis, topic modeling, and contextual information extraction."
+      ],
+      tech_stacks: [
+        "Python", "FastAPI", "GCP", "Gemini", "Elasticsearch",
+        "Docker",  "JavaScript","Selenium", "Telegram","VertexAI","GCP","DocumentAI",
+        "Cloudrun"
+      ],
+      projects: [
+        {
+          name: "Insight Jakarta Platform",
+          achievements: [
+            "Architected a scalable data pipeline running on Google Cloud Platform (GCE) for continuous data collection and processing",
+            "Implemented advanced sentiment analysis and topic modeling using Gemini AI for social media and news content",
+            "Developed a vector database system using Elasticsearch for efficient information retrieval and contextual search",
+            "Created a network analysis API for understanding social connections and information flow patterns",
+            "Built an interactive web interface using Next.js and TailwindCSS with space-themed design",
+            "Integrated Telegram bot for automated alerts and user interactions"
+          ]
+        }
+      ]
+    },
+    {
       company: "PT Pakar Digital Global (Paper.id)",
       logo: "/logos/paper_id.png",
       position: "Senior Data Scientist",
