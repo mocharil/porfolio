@@ -5,9 +5,9 @@ export default function Marquee({
   children,
   direction = "left",
   pauseOnHover = false,
-  reverse = false,
   fade = false,
   className,
+  speed = 40, // Speed in seconds, lower = faster
 }) {
   const containerRef = useRef(null);
   const scrollerRef = useRef(null);
@@ -28,24 +28,7 @@ export default function Marquee({
         }
       });
 
-      getDirection();
       setStart(true);
-    }
-  };
-
-  const getDirection = () => {
-    if (containerRef.current) {
-      if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
-        );
-      }
     }
   };
 
@@ -61,10 +44,12 @@ export default function Marquee({
         ref={scrollerRef}
         className={cn(
           "flex min-w-full shrink-0 flex-nowrap gap-4 py-4",
-          start && "animate-scroll",
-          pauseOnHover && "hover:[animation-play-state:paused]",
-          reverse ? "[animation-direction:reverse]" : ""
+          direction === "left" ? "animate-marquee-left" : "animate-marquee-right",
+          pauseOnHover && "hover:[animation-play-state:paused]"
         )}
+        style={{
+          animationDuration: `${speed}s`
+        }}
       >
         {children}
       </div>
