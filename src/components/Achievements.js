@@ -90,7 +90,7 @@ const AchievementCard = ({ title, event, date, description, index, logo, techSta
 const Achievements = () => {
   const achievements = [
     {
-      title: "Top 100 Hackathon 'AI for Impact for APAC Region'",
+      title: "Top 10 Hackathon 'AI for Impact for APAC Region'",
       event: "Hack2skill",
       date: "Dec 2024",
       logo: "ai_for_impact.png",
