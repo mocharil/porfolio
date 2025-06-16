@@ -92,12 +92,12 @@ export default function Home() {
               </svg>
               Founder of{" "}
               <a 
-                href="https://insight-jakarta-ai.vercel.app/" 
+                href="https://www.moskal.id/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-blue-400 hover:text-blue-200 transition-colors duration-300 hover:underline"
               >
-                Insight Jakarta
+                Moskal.id
               </a>
             </motion.p>
             <motion.div

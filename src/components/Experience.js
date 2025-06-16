@@ -88,7 +88,7 @@ const Experience = () => {
       ],
       tech_stacks: [
         "Python", "FastAPI", "GCP", "Gemini", "Elasticsearch",
-        "Docker",  "JavaScript","Selenium", "Telegram","VertexAI","GCP","DocumentAI",
+        "Docker",  "JavaScript","Selenium","VertexAI","GCS","DocumentAI",
         "Cloudrun"
       ],
       projects: [
@@ -409,8 +409,63 @@ const Experience = () => {
       ]
     }
   ]
-}
- ].sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
+  },
+  {
+    company: "moskal.id",
+    logo: "/logos/moskal.png",
+    position: "Co-Founder",
+    location: "South Jakarta, Jakarta, Indonesia",
+    type: "Full-time",
+    start_date: "Jun 2025",
+    end_date: "Present",
+    responsibilities: [
+      "As Co-Founder and Chief Technology Officer (CTO) at Moskal, I led the end-to-end development of an AI-powered platform that provides real-time insights from social media trends and user behavior. I was responsible for both the technical architecture and product strategy, driving innovation and ensuring seamless integration of AI technologies.",
+      "End-to-End Product Development: Spearheaded the design, architecture, and development of the platform, overseeing backend development, data pipelines, and AI integration for scalable, real-time insights.",
+      "Leadership in AI & Data Engineering: Developed advanced systems for collecting and processing data from social media platforms (Twitter, Instagram, TikTok), enabling businesses to gain actionable insights through machine learning and natural language processing (NLP).",
+      "Core Feature Development: Delivered key features such as Keyword Trends, Topic Analysis, Influencer Monitoring (KOL), and Engagement Metrics, with advanced filtering and search capabilities that enhanced user experience and decision-making.",
+      "AI-Powered Insights & Automation: Created an AI Chatbot integrated with sentiment analysis and Generative AI for real-time user interactions and automated report generation.",
+      "UI/UX & Product Strategy: Directed the design of a user-friendly dashboard, providing real-time metrics such as mentions tracking, KOL analysis, and data visualizations, ensuring a seamless and intuitive experience for users.",
+      "Scalable Architecture: Architected a robust and scalable platform that integrates seamlessly with external data sources, ensuring high performance and availability across devices.",
+      "Startup Leadership: As CTO, I shaped the technology strategy, product roadmap, and go-to-market plans, collaborating with cross-functional teams to align the product with business goals, and drove the company’s technological vision."
+    ],
+    tech_stacks: ["Python", "FastAPI", "JavaScript", "Elasticsearch", 
+                "Docker", "Gemini","CloudRun","GCS","MySQL","Selenium"], // Placeholder based on description and Insight Jakarta
+    projects: [
+      {
+        name: "AI-Powered Social Media Analytics Platform",
+        achievements: [
+          "Led the end-to-end development of the platform.",
+          "Developed systems for data collection from Twitter, Instagram, TikTok.",
+          "Delivered features like Keyword Trends, Topic Analysis, KOL Monitoring.",
+          "Created an AI Chatbot with sentiment analysis and Generative AI.",
+          "Directed UI/UX design for a user-friendly dashboard."
+        ]
+      }
+    ]
+  }
+].sort((a, b) => {
+  // Handle "Present" end dates by treating them as the most recent
+  const dateA = a.end_date === "Present" ? new Date() : new Date(a.start_date);
+  const dateB = b.end_date === "Present" ? new Date() : new Date(b.start_date);
+  
+  // If both are "Present" or have the same start date, sort by original insertion for stability if needed,
+  // but for now, primary sort is by start_date descending.
+  // For jobs that are "Present", we want them at the top.
+  // A simple way to ensure "Present" jobs are first is to give them a very future date for sorting purposes,
+  // or handle them explicitly.
+  
+  // Sort by end_date first to get "Present" jobs at the top
+  if (a.end_date === "Present" && b.end_date !== "Present") return -1;
+  if (a.end_date !== "Present" && b.end_date === "Present") return 1;
+
+  // If both are "Present" or both are not, sort by start_date descending
+  const startDateA = new Date(a.start_date.split(" ")[1] || a.start_date, 
+                            ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(a.start_date.split(" ")[0]));
+  const startDateB = new Date(b.start_date.split(" ")[1] || b.start_date,
+                            ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(b.start_date.split(" ")[0]));
+
+  return startDateB - startDateA;
+});
 
   useEffect(() => {
     if (timelineRef.current) {
